@@ -1,13 +1,13 @@
 from django.db import models
 
 
-class Category(models.Model):
-    name = models.CharField('nome', max_length=100)
-
-
 class Tag(models.Model):
     name = models.CharField('nome', max_length=100)
-    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    parent = models.ManyToManyField('self', blank=True)
+    slug = models.SlugField('slug')
+
+    def __str__(self):
+        return self.name
 
 
 class Content(models.Model):
@@ -16,7 +16,8 @@ class Content(models.Model):
     content = models.TextField('conteudo', blank=True)
     position = models.IntegerField('posicao')
     is_listable = models.IntegerField('listavel')
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
+    slug = models.SlugField('slug')
 
 
 class Card(models.Model):
@@ -26,3 +27,4 @@ class Card(models.Model):
     content = models.TextField('conteudo', blank=True)
     position = models.IntegerField('posicao')
     parent = models.ForeignKey(Content, on_delete=models.CASCADE)
+    slug = models.SlugField('slug')
