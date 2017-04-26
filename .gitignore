@@ -1,0 +1,8 @@
+.env
+.idea/
+.cms/
+*.sqlite3
+__pycache__
+*pyc
+staticfiles
+.ipynb_checkpoints/
