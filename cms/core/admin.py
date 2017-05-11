@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import Card, Content, Tag
 
-# Register your models here.
-admin.site.register(Card)
-admin.site.register(Content)
+
+class ContentModelAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+admin.site.register(Content, ContentModelAdmin)
 
 
 class TagModelAdmin(admin.ModelAdmin):
@@ -11,3 +13,10 @@ class TagModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Tag, TagModelAdmin)
+
+
+class CardModelAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+
+admin.site.register(Card, CardModelAdmin)
