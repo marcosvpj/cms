@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+    {% for c in content %}
+        <li>
+            {{ c.name }}
+            <ul>
+                {% for ca in c.cards %}
+                    <li>{{ca.name}}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

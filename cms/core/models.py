@@ -18,6 +18,14 @@ class Content(models.Model):
     is_listable = models.IntegerField('listavel')
     tags = models.ManyToManyField(Tag, blank=True)
     slug = models.SlugField('slug')
+    # cards = models.ForeignKey('Card', on_delete=models.SET_NULL, blank=True, null=True, related_name='card')
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def cards(self):
+        return Card.objects.filter(parent=self.id)
 
 
 class Card(models.Model):
@@ -28,3 +36,6 @@ class Card(models.Model):
     position = models.IntegerField('posicao')
     parent = models.ForeignKey(Content, on_delete=models.CASCADE)
     slug = models.SlugField('slug')
+
+    def __str__(self):
+        return self.name
